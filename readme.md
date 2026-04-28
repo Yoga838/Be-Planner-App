@@ -1,73 +1,152 @@
-🎮 Project Document: Pixel Task Quest
-"Work Hard, Level Up, and Don't Break the Streak!"
+# 🎮 Pixel Task Quest
 
-1. Ringkasan Projek
-Pixel Task Quest adalah sebuah aplikasi planner pribadi yang menggabungkan fungsi produktivitas dengan elemen RPG (Role Playing Game) klasik. Aplikasi ini didesain khusus untuk developer yang sering bekerja di jam malam (20:00 - 01:00) dengan fitur utama notifikasi yang "bawel" dan sistem streak untuk menjaga konsistensi koding.
+**Work Hard, Level Up, and Don't Break the Streak!**
 
-Fitur Utama:
-Floating HUD (Desktop): Widget melayang di PC (Electron) yang transparan dan always-on-top.
+---
 
-Hourly Nagging: Notifikasi setiap jam dari karakter pixel untuk memastikan user tetap pada jalur.
+## 📌 1. Project Overview
 
-The Trinity Sync: Sinkronisasi real-time antara Web (Next.js), Desktop (Electron), dan Mobile (Flutter).
+**Pixel Task Quest** adalah aplikasi planner pribadi yang menggabungkan produktivitas dengan elemen RPG klasik. Aplikasi ini dirancang khusus untuk developer yang aktif bekerja di malam hari (20:00 - 01:00), dengan sistem notifikasi agresif ("nagging") dan mekanisme streak untuk menjaga konsistensi.
 
-RPG Gamification: Sistem Level, XP, dan Loot Item berdasarkan streak harian.
+---
 
-Pixel Art Aesthetic: UI retro 8-bit yang lucu namun informatif.
+## 🚀 2. Key Features
 
-2. Tech Stack (Arsitektur)
-Backend: Node.js & Express.js (Otak pusat & API).
+### 🖥️ Floating HUD (Desktop)
 
-Database: MongoDB / PostgreSQL (Penyimpanan Quest & Stats).
+* Widget transparan (Electron)
+* Always-on-top
+* Menampilkan status task & progress secara real-time
 
-Desktop App: Electron.js + React/Next.js (Widget HUD).
+### ⏰ Hourly Nagging System
 
-Mobile App: Flutter (Remote control & Push Notif).
+* Notifikasi setiap jam
+* Karakter pixel akan “mengingatkan” user agar tetap fokus
 
-Communication: * Socket.io (Real-time update ke PC).
+### 🔄 Trinity Sync
 
-Firebase Cloud Messaging (Push Notif ke HP).
+* Sinkronisasi real-time antara:
 
-node-cron (Penjadwal notifikasi bawel).
+  * Web (Next.js)
+  * Desktop (Electron)
+  * Mobile (Flutter)
 
-3. Langkah Kerja (Roadmap)
-Fase 1: Pondasi (Backend)
-Setup server Express dan koneksi Database.
+### 🎯 RPG Gamification
 
-Buat API CRUD untuk manajemen Quest.
+* Level & Experience (XP)
+* Daily streak system
+* Loot / reward berbasis konsistensi
 
-Implementasi node-cron untuk pengecekan jam aktif (20:00 - 01:00).
+### 🎨 Pixel Art Aesthetic
 
-Setup Firebase Admin SDK untuk pengiriman notifikasi.
+* UI bergaya retro 8-bit
+* Visual ringan tapi informatif
 
-Fase 2: Visualisasi (Desktop Widget)
-Setup project Electron dengan React.
+---
 
-Konfigurasi Window: transparent: true, frame: false, alwaysOnTop: true.
+## 🏗️ 3. Tech Stack
 
-Slicing UI Pixel Art (Karakter, Quest Cards, HP/MP Bar).
+| Layer        | Technology                    |
+| ------------ | ----------------------------- |
+| Backend      | Node.js, Express.js           |
+| Database     | MongoDB / PostgreSQL          |
+| Desktop      | Electron.js + React / Next.js |
+| Mobile       | Flutter                       |
+| Realtime     | Socket.io                     |
+| Notification | Firebase Cloud Messaging      |
+| Scheduler    | node-cron                     |
 
-Integrasi Socket.io-client untuk menerima update instan dari backend.
+---
 
-Fase 3: Kendali (Mobile App)
-Setup project Flutter dan Firebase Messaging.
+## 🛠️ 4. Development Roadmap
 
-Buat UI daftar Quest dengan tema warna retro.
+### 🔹 Phase 1: Backend Foundation
 
-Hubungkan fungsi "Complete Quest" ke API Backend.
+* Setup Express server
+* Integrasi database
+* API CRUD untuk Quest
+* Implementasi `node-cron` (20:00 - 01:00 window)
+* Setup Firebase Admin SDK
 
-Fase 4: Gamifikasi (Logic & Polish)
-Buat algoritma hitung Streak (reset jika absen di hari yang ditentukan).
+---
 
-Tambahkan fitur Loot Box (item kosmetik pixel) setiap kelipatan streak tertentu.
+### 🔹 Phase 2: Desktop Widget (HUD)
 
-Pemberian efek suara 8-bit pada notifikasi penting.
+* Setup Electron + React
+* Window configuration:
 
-4. Desain Guideline
-Font: Press Start 2P atau Silkscreen.
+  ```js
+  {
+    transparent: true,
+    frame: false,
+    alwaysOnTop: true
+  }
+  ```
+* Integrasi Socket.io client
+* Implementasi UI pixel (HUD, HP bar, Quest list)
 
-Warna Utama: #1a1a1a (Dark), #39FF14 (Neon Green), #00FFFF (Cyan).
+---
 
-Asset: 32x32 Pixel Sprites.
+### 🔹 Phase 3: Mobile App
 
-Note dari Pencari Ide: > "Jangan lupa, kuncinya ada di konsistensi. Mulai dari backend yang simpel, baru hias visualnya belakangan. Selamat ngoding, Hero!"
+* Setup Flutter project
+* Integrasi Firebase Messaging
+* UI Quest list (retro theme)
+* Action: Complete Quest → API backend
+
+---
+
+### 🔹 Phase 4: Gamification System
+
+* Streak calculation logic
+* Reset mekanisme jika absen
+* Loot system (reward tiap milestone)
+* Tambahan sound effect 8-bit
+
+---
+
+## 🎨 5. Design Guidelines
+
+### Font
+
+* Press Start 2P
+* Silkscreen
+
+### Color Palette
+
+| Element          | Color                  |
+| ---------------- | ---------------------- |
+| Background       | `#1a1a1a`              |
+| Primary Accent   | `#39FF14` (Neon Green) |
+| Secondary Accent | `#00FFFF` (Cyan)       |
+
+### Asset
+
+* Sprite ukuran **32x32 px**
+* Gaya pixel art retro
+
+---
+
+## ⚡ Philosophy
+
+> “Consistency is the real grind. Build the core first, polish later.”
+
+Mulai dari backend yang solid, baru lanjut ke visual dan gamifikasi.
+
+---
+
+## 🧩 Future Improvements
+
+* Achievement system
+* Multiplayer accountability (party system)
+* AI-based productivity suggestion
+* Theme customization (dark/light pixel mode)
+
+---
+
+## 🧙 Final Note
+
+Selamat datang di perjalananmu, **Hero**.
+Jaga streak-mu, kumpulkan XP, dan jangan sampai kalah sama rasa malas.
+
+**Stay focused. Stay grinding. Level up.**
