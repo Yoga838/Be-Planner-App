@@ -13,6 +13,7 @@ const cronService = require('./services/cronService');
 // Import routes
 const questRoutes = require('./routes/questRoutes');
 const userRoutes = require('./routes/userRoutes');
+const notificationRoutes = require('./routes/notificationRoutes');
 
 const app = express();
 const server = http.createServer(app);
@@ -39,6 +40,9 @@ app.get('/health', (req, res) => {
 
 app.use('/api/v1/quests', questRoutes);
 app.use('/api/v1/users', userRoutes);
+app.use('/api/v1/quests', questRoutes);
+app.use('/api/v1/users', userRoutes);
+app.use('/api/v1/notifications', notificationRoutes)
 app.get('/',(req,res) => {
   res.json({
     Status : "success"
