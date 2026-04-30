@@ -8,6 +8,7 @@
     "dev": "nodemon src/app.js",
     "setup": "node src/scripts/setup.js",
     "migrate": "node src/scripts/runMigration.js",
+    "vercel-build": "echo 'Build complete'",
     "seed": "node src/scripts/seed.js"
   },
   "dependencies": {

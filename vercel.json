@@ -1,0 +1,48 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/index.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api-docs",
+      "dest": "/api/index.js"
+    },
+    {
+      "src": "/api-docs/swagger.json",
+      "dest": "/api/index.js"
+    },
+    {
+      "src": "/api/v1/(.*)",
+      "dest": "/api/index.js"
+    },
+    {
+      "src": "/health",
+      "dest": "/api/index.js"
+    },
+    {
+      "src": "/socket.io/(.*)",
+      "dest": "/api/index.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/api/index.js"
+    }
+  ],
+  "env": {
+    "NODE_ENV": "production"
+  },
+   "crons": [
+    {
+      "path": "/api/cron/nagging",
+      "schedule": "0 * * * *"
+    },
+    {
+      "path": "/api/cron/deadlines",
+      "schedule": "*/30 * * * *"
+    }
+  ]
+}

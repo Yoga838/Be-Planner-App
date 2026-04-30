@@ -1,47 +1,51 @@
-// src/config/socket.js
-const { Server } = require('socket.io');
+// src/config/socket.js - Serverless version
+let io = null;
 
-let io;
+function initializeSocket(server) {
+  // Di Vercel, Socket.io tidak bisa jalan karena serverless
+  // Gunakan Supabase Realtime sebagai alternative untuk production
+  if (process.env.VERCEL) {
+    console.log('⚠️  Running on Vercel - WebSocket disabled');
+    console.log('💡 Use Supabase Realtime or Pusher for real-time features');
+    return null;
+  }
 
-const initializeSocket = (server) => {
-  io = new Server(server, {
-    cors: {
-      origin: "*", // Configure appropriately for production
-      methods: ["GET", "POST"]
-    }
-  });
-
-  io.on('connection', (socket) => {
-    console.log(`Desktop client connected: ${socket.id}`);
-
-    // Join user-specific room for targeted notifications
-    socket.on('join-room', (userId) => {
-      socket.join(`user-${userId}`);
-      console.log(`User ${userId} joined their room`);
+  // Kalo di local/development, jalanin Socket.io seperti biasa
+  try {
+    const { Server } = require('socket.io');
+    io = new Server(server, {
+      cors: {
+        origin: "*",
+        methods: ["GET", "POST"]
+      }
     });
 
-    // Handle real-time quest updates
-    socket.on('quest-update', (data) => {
-      socket.broadcast.emit('quest-changed', data);
+    io.on('connection', (socket) => {
+      console.log(`🟢 Client connected: ${socket.id}`);
+      socket.on('join-room', (userId) => {
+        if (userId) {
+          socket.join(`user-${userId}`);
+        }
+      });
+      socket.on('disconnect', () => {
+        console.log(`🔴 Client disconnected: ${socket.id}`);
+      });
     });
 
-    socket.on('disconnect', () => {
-      console.log(`Desktop client disconnected: ${socket.id}`);
-    });
-  });
+    console.log('✅ Socket.io initialized');
+    return io;
+  } catch (error) {
+    console.warn('⚠️  Socket.io initialization failed:', error.message);
+    return null;
+  }
+}
 
-  return io;
-};
-
-const getIO = () => {
-  if (!io) {
-    throw new Error('Socket.io not initialized');
+function getIO() {
+  if (process.env.VERCEL) {
+    console.warn('WebSocket not available on Vercel');
+    return null;
   }
   return io;
-};
+}
 
-// PENTING: Export dengan cara yang benar
-module.exports = { 
-  initializeSocket,  // ini function
-  getIO              // ini juga function
-};
+module.exports = { initializeSocket, getIO };

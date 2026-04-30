@@ -1,0 +1,8 @@
+# .vercelignore
+node_modules
+.git
+.env
+*.log
+README.md
+backup-*
+test-*
